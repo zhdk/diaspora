@@ -30,6 +30,12 @@ $pane-width: 420px;
 @mixin pane-width() {
   width: $pane-width;
   max-width: 100%;
+
+  /* the interaction pane should cover the entire bottom section
+     of the viewport */
+  @media (max-width: 480px) {
+    //width: 100%;
+  }
 }
 
 @mixin background-cover() {
@@ -120,6 +126,18 @@ $pane-width: 420px;
 }
 
 /* styles */
+
+
+/* prevent weirdness with overflow issues.  we never want to scroll right or left
+   for any reason */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
 .multi-photo {
   display: table;
 
@@ -448,10 +466,34 @@ body.idle {
 }
 
 #post-reactions {
-  height: 80%;
   max-height: 350px;
   overflow: auto;
   margin-top: 5px;
+
+  /* we don't want the reaction pane to be bound by an inner scroll window
+    as it gets ugly in mobile land and causes user frustration! */
+  @media (max-width: 480px) {
+    max-height: none !important;
+  }
+}
+
+#post-info-sneaky {
+  @media (max-width: 480px) {
+    display: none !important;
+  }
+}
+
+#post-interactions {
+  @media (max-width: 480px) {
+    position: absolute;
+    top: 100%;
+  }
+}
+
+#post-info {
+  @media (max-width: 480px) {
+    display: block !important;
+  }
 }
 
 #post-info,
@@ -526,6 +568,11 @@ body.idle {
     textarea{
       height: 18px;
       width: 318px;
+
+      /* smaller textarea needed for mobile devices */
+      @media (max-width: 480px) {
+        width: 210px;
+      }
     }
 
     form {
