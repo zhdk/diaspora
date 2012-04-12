@@ -4,13 +4,16 @@
 
 class Postzord::Receiver::LocalBatch < Postzord::Receiver
 
-  attr_reader :object, :recipient_user_ids, :users
+  attr_reader :object, :recipient_user_ids
 
   def initialize(object, recipient_user_ids)
     @object = object
     @recipient_user_ids = recipient_user_ids
-    @users = User.where(:id => @recipient_user_ids)
-
+    @users_to_possibly_notify = if @object.respond_to?(:participants)
+                                  @object.participants.local.includes(:owner).map(&:owner)
+                                else
+                                  []
+                                end
   end
 
   def receive!
@@ -22,7 +25,6 @@ class Postzord::Receiver::LocalBatch < Postzord::Receiver
     end
     notify_mentioned_users if @object.respond_to?(:mentions)
 
-    # 09/27/11 this is slow
     notify_users
 
     FEDERATION_LOGGER.info("receiving local batch completed for #{@object.inspect}")
@@ -60,7 +62,7 @@ class Postzord::Receiver::LocalBatch < Postzord::Receiver
   # return [void]
   def notify_users
     return unless @object.respond_to?(:notification_type)
-    @users.each do |user|
+    @users_to_possibly_notify.each do |user|
       Notification.notify(user, @object, @object.author)
     end
   end

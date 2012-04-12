@@ -10,9 +10,9 @@ describe Postzord::Receiver::LocalBatch do
   let(:receiver) { Postzord::Receiver::LocalBatch.new(@object, @ids) }
 
   describe '.initialize' do
-    it 'sets @post, @recipient_user_ids, and @user' do
-      [:object, :recipient_user_ids, :users].each do |instance_var|
-        receiver.send(instance_var).should_not be_nil
+    it 'sets @post, @recipient_user_ids, and @users_to_possibly_notify' do
+      [:object, :recipient_user_ids, :users_to_possibly_notify].each do |instance_var|
+        receiver.instance_variable_get("@#{instance_var}".to_sym).should_not be_nil
       end
     end
   end
@@ -63,6 +63,7 @@ describe Postzord::Receiver::LocalBatch do
       reshare = Factory(:reshare)
       Notification.should_receive(:notify)
       receiver = Postzord::Receiver::LocalBatch.new(reshare, @ids)
+      receiver.instance_variable_set(:@users_to_possibly_notify, [alice])
       receiver.notify_users
     end
 

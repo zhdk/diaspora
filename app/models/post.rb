@@ -13,6 +13,7 @@ class Post < ActiveRecord::Base
 
 
   has_many :participations, :dependent => :delete_all, :as => :target
+  has_many :participants, :through => :participations, :source => 'author'
 
   attr_accessor :user_like,
                 :user_participation
