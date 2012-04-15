@@ -66,15 +66,15 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    if user_signed_in?
-      I18n.locale = current_user.language
-    else
-      locale = request.preferred_language_from AVAILABLE_LANGUAGE_CODES
-      locale ||= request.compatible_language_from AVAILABLE_LANGUAGE_CODES
-      locale ||= DEFAULT_LANGUAGE
-      I18n.locale = locale
-      I18n.locale = params[:lang] if params[:lang].present? && AVAILABLE_LANGUAGE_CODES.include? params[:lang]
-    end
+    #this could be a LocaleFinder object, or maybe an upstream helper method
+    I18n.locale = if user_signed_in?
+                    current_user.language
+                  else
+                    locale = AVAILABLE_LANGUAGE_CODES.find{|x|  x == params[:lang]}
+                    locale ||= request.preferred_language_from(AVAILABLE_LANGUAGE_CODES)
+                    locale ||= request.compatible_language_from(AVAILABLE_LANGUAGE_CODES)
+                    locale ||= DEFAULT_LANGUAGE
+                  end
   end
 
   def redirect_unless_admin

@@ -45,4 +45,21 @@ describe ApplicationController do
     #  end
     #end
   end
+
+  describe "#set_locale" do
+    it 'defaults to the default language' do
+      get :index
+      I18n.locale.should == DEFAULT_LANGUAGE.to_sym
+    end
+
+    it 'prefers a param passed to the page' do
+      get :index, :lang => 'es'
+      I18n.locale.should == 'es'.to_sym
+    end
+
+    it 'defaults to the current users language'
+
+    it 'if no one is signed in, it tries to infer it from the request'
+
+  end
 end
