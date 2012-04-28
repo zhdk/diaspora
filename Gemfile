@@ -52,6 +52,7 @@ group :heroku do
 end
 
 gem 'settingslogic', :git => 'git://github.com/binarylogic/settingslogic.git'
+gem 'figaro'
 # database
 
 gem "activerecord-import", "~> 0.2.9"
