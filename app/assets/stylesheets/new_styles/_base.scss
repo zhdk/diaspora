@@ -16,6 +16,19 @@ a { color : rgb(42,156,235)  }
   width: 100%;
 }
 
+#video {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  z-index: 10000;
+
+  &.object {
+    height: 50%;
+    width: 50%;
+  }
+
+}
+
 .rich-media {
   //z-index : -5000; //so the framer controls don't get lost
   position: absolute;

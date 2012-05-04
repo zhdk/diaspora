@@ -38,6 +38,7 @@
 
     = jquery_include_tag
 
+    = javascript_include_tag 'jquery.webcam'
     = set_current_user_in_javascript
 
     - unless @landing_page
@@ -56,9 +57,26 @@
     = yield(:head)
     = csrf_meta_tag
 
+  #video
   %body
     = flash_messages
     #container
+    :javascript
+        $(document).ready(function(){
+          $("#video").webcam({
+        width: 215  ,
+        height: 150,
+        mode: "callback",
+        swffile: "/jscam_canvas_only.swf",
+        onTick: function() {},
+        onSave: function() {},
+        onCapture: function() {},
+        debug: function() {},
+        onLoad: function() {}
+        });
+
+        })
+      
     = javascript_tag  "window.preLoadContent = '#{escape_javascript(yield)}'"
 
     = include_chartbeat
