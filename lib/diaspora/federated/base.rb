@@ -34,10 +34,9 @@ module Diaspora
           XML
         end
 
-        def author
-
-          raise 'You must override author in order to enable federation on this model'
-        end
+        # def author
+        #   raise 'You must override author in order to enable federation on this model'
+        # end
 
         def x(input)
           input.to_s.to_xs

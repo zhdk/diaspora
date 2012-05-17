@@ -16,10 +16,6 @@ require File.join(Rails.root, 'lib/diaspora/federated/validator/private')
 # currently, there are two gross ways into this object, one which takes encrypted xml,
 # and another which takes an object directly
 
-class Postzord::Receiver::PrivateLocal
-
-end
-
 
 #note, two code paths to extract here :/
 # decent federation case 1. call with salmon_xml from federation request, and call receive

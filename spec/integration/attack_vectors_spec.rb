@@ -217,7 +217,9 @@ describe "attack vectors" do
         malicious_message = Factory.build(:status_message, :id => original_message.id, :guid => original_message.guid, :author => alice.person)
 
         expect{
-          receive(malicious_message, :from => alice, :by => bob)
+          expect_error /Guid has already been taken/ do
+            receive(malicious_message, :from => alice, :by => bob)
+          end
         }.should_not change(original_message, :author_id)
       end
 
@@ -249,7 +251,9 @@ describe "attack vectors" do
       new_message.text = "bad bad bad"
 
       expect{
-        receive(new_message, :from => alice, :by => bob)
+          expect_error /Guid has already been taken/ do
+            receive(new_message, :from => alice, :by => bob)
+          end
        }.should_not change(original_message, :text)
     end
   end

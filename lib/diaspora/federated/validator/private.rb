@@ -65,7 +65,7 @@ class Diaspora::Federated::Validator::Private
   def expected_object_authority
     if object.respond_to?(:relayable?) && object.parent.present?
       #if A and B are friends, and A sends B a comment from C, we delegate the validation to the owner of the post being commented on
-      if  user.owns?(object.parent) 
+      if user.owns?(object.parent) 
         object.diaspora_handle 
       else
         object.parent.author.diaspora_handle
