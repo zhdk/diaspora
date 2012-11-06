@@ -163,4 +163,5 @@ group :development do
   gem 'capistrano', '2.12.0', :require => false
   gem 'capistrano_colors', '0.5.5', :require => false
   gem 'capistrano-ext', '1.2.1', :require => false
+  gem 'rvm-capistrano'
 end

@@ -355,6 +355,8 @@ GEM
     ruby-oembed (0.8.7)
     ruby-progressbar (0.0.10)
     rubyzip (0.9.9)
+    rvm-capistrano (1.2.7)
+      capistrano (>= 2.0.0)
     sass (3.1.19)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -475,6 +477,7 @@ DEPENDENCIES
   rspec-instafail (= 0.2.4)
   rspec-rails (= 2.11.0)
   ruby-oembed (= 0.8.7)
+  rvm-capistrano
   sass-rails (= 3.2.5)
   selenium-webdriver (= 2.25.0)
   spork (= 1.0.0rc3)
