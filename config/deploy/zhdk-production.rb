@@ -7,11 +7,8 @@ set :rvm_type, :system
 
 require 'bundler/capistrano'
 require './config/boot'
-set :bundle_dir, ''
 
 require 'capistrano/ext/multistage'
-
-
 
 set :repository, "git://github.com/zhdk/madek.git"
 set :application, 'diaspora'
@@ -19,10 +16,10 @@ set :scm, :git
 set :branch, "develop"
 set :use_sudo, false
 set :scm_verbose, true
-set :repository_cache, "remote_cache"
-set :deploy_via, :checkout
+set :checkout, :export
+
 set :bundle_without,  [:development, :test, :heroku]
-set :deploy_to, "/home/diaspora"
+set :deploy_to, "/home/diaspora/diaspora"
 
 role :app, "diaspora@rails.zhdk.ch"
 role :web, "diaspora@rails.zhdk.ch"
