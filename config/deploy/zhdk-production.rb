@@ -16,6 +16,7 @@ require 'capistrano/ext/multistage'
 set :repository, "git://github.com/zhdk/madek.git"
 set :application, 'diaspora'
 set :scm, :git
+set :branch, "develop"
 set :use_sudo, false
 set :scm_verbose, true
 set :repository_cache, "remote_cache"
