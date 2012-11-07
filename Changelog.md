@@ -19,6 +19,7 @@
 
 ## Features
 
+* Add "My Activity" icon mobile -[Author Icon](http://www.gentleface.com/free_icon_set.html)-. [#3687](https://github.com/diaspora/diaspora/pull/3687)
 * Add password_confirmation field to registration page. [#3647](https://github.com/diaspora/diaspora/pull/3647)
 * When posting to Twitter, behaviour changed so that URL to post will only be added to the post when length exceeds 140 chars or post contains uploaded photos.
 
@@ -34,6 +35,8 @@
 * Fix css overflow problem in aspect dropdown on welcome page. [#3637](https://github.com/diaspora/diaspora/pull/3637)
 * Fix empty page after authenticating with other services. [#3693](https://github.com/diaspora/diaspora/pull/3693)
 * Fix posting public posts to Facebook. [#2882](https://github.com/diaspora/diaspora/issues/2882), [#3650](https://github.com/diaspora/diaspora/issues/3650)
+* Fix error with invite link box shows on search results page even if invites have been turned off. [#3708](https://github.com/diaspora/diaspora/pull/3708)
+* Fix misconfiguration of Devise to allow the session to be remembered. [#3472](https://github.com/diaspora/diaspora/issues/3472)
 
 # 0.0.1.2
 
