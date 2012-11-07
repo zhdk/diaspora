@@ -50,7 +50,7 @@ namespace :deploy do
   end
 end
 
-after 'deploy:symlink' do
+after 'deploy:create_symlink' do
   deploy.symlink_config_files
   deploy.symlink_cookie_secret
   deploy.bundle_static_assets
