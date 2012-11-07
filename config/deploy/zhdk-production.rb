@@ -10,7 +10,7 @@ require './config/boot'
 
 require 'capistrano/ext/multistage'
 
-set :repository, "git://github.com/zhdk/madek.git"
+set :repository, "git://github.com/zhdk/diaspora.git"
 set :application, 'diaspora'
 set :scm, :git
 set :branch, "develop"
