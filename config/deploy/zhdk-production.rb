@@ -48,6 +48,12 @@ namespace :deploy do
     target = "#{release_path}/public/resque-jobs"
     run "cp -r `cd #{release_path} && bundle show resque`/lib/resque/server/public #{target}"
   end
+
+  desc 'Start a resque worker'
+  task :start_resque_worker do
+    run "cd #{release_path} && RAILS_ENV=production QUEUE=* bundle exec rake resque:work"
+  end
+
 end
 
 after 'deploy:create_symlink' do
@@ -55,6 +61,7 @@ after 'deploy:create_symlink' do
   deploy.symlink_cookie_secret
   deploy.bundle_static_assets
   deploy.copy_resque_assets
+  deploy.start_resque_worker
 end
 
 
