@@ -35,6 +35,10 @@ namespace :deploy do
     run "ln -s -f #{shared_path}/config/initializers/secret_token.rb #{current_path}/config/initializers/secret_token.rb"
   end
 
+  task :symlink_upload_dir do
+    run "ln -s -f #{shared_path}/uploads #{current_path}/public/uploads"
+  end
+
   task :bundle_static_assets do
     run "cd #{current_path} && bundle exec rake assets:precompile"
   end
@@ -51,7 +55,9 @@ namespace :deploy do
 
   desc 'Start a resque worker'
   task :start_resque_worker do
-    run "cd #{release_path} && RAILS_ENV=production QUEUE=* bundle exec rake resque:work"
+    run "cd #{release_path}"
+    run "/home/diaspora/kill_resque_workers.sh"
+    run "/home/diaspora/start_resque_workers.sh"
   end
 
 end
@@ -59,6 +65,7 @@ end
 after 'deploy:create_symlink' do
   deploy.symlink_config_files
   deploy.symlink_cookie_secret
+  deploy.symlink_upload_dir
   deploy.bundle_static_assets
   deploy.copy_resque_assets
   deploy.start_resque_worker
